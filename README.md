@@ -1,3 +1,5 @@
+⚠️ This Fork is deprecated in favour of [flutter_statusbar_control](https://github.com/rafaelmaeuer/flutter_statusbar_control) ⚠️
+
 # flutter_statusbar_manager
 
 As [FooStudio/flutter_statusbar_manager](https://github.com/FooStudio/flutter_statusbar_manager) doesn't seem to be maintained anymore, this fork will keep some further development as I want to continue using this dependencies in some projects.

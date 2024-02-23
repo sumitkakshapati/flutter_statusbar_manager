@@ -5,6 +5,7 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +18,7 @@ void main() {
   testWidgets('test flutter_statusbar_manager example',
       (WidgetTester tester) async {
     // Build the app and trigger a frame.
-    await tester.pumpWidget(StatusBarManager());
+    await tester.pumpWidget(const StatusBarManager());
 
     // Verify that status bar heigth is not 0
     expect(find.text('Status Bar Height: 0'), findsNothing);
@@ -25,10 +26,13 @@ void main() {
     // Prepare log to read results from
     final List<MethodCall> log = <MethodCall>[];
     TestDefaultBinaryMessengerBinding.instance!.defaultBinaryMessenger
-        .setMockMethodCallHandler(SystemChannels.platform,
-            (MethodCall methodCall) async {
-      log.add(methodCall);
-    });
+        .setMockMethodCallHandler(
+      SystemChannels.platform,
+      (MethodCall methodCall) async {
+        log.add(methodCall);
+        return null;
+      },
+    );
 
     // The first call is a cache miss and will queue a microtask
     SystemChrome.setApplicationSwitcherDescription(
@@ -40,7 +44,9 @@ void main() {
 
     // Flush all microtasks
     await tester.idle();
-    print(log);
+    if (kDebugMode) {
+      print(log);
+    }
 
     // Verify result lenght and content
     expect(log, hasLength(1));
@@ -65,7 +71,9 @@ void main() {
 
     // Flush all microtasks
     await tester.idle();
-    print(log);
+    if (kDebugMode) {
+      print(log);
+    }
 
     // Verify result lenght and content
     expect(log, hasLength(2));

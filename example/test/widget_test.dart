@@ -25,7 +25,7 @@ void main() {
 
     // Prepare log to read results from
     final List<MethodCall> log = <MethodCall>[];
-    TestDefaultBinaryMessengerBinding.instance!.defaultBinaryMessenger
+    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
         .setMockMethodCallHandler(
       SystemChannels.platform,
       (MethodCall methodCall) async {
